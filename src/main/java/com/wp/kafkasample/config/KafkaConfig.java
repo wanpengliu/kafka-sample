@@ -68,5 +68,4 @@ public class KafkaConfig {
         return new StringJsonMessageConverter();
     }
 
-
 }

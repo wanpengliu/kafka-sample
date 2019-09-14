@@ -1,11 +1,16 @@
 package com.wp.kafkasample.model;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "type")
 public class Payment {
 
     private String merchant;
