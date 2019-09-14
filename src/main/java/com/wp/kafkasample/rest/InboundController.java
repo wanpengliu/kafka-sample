@@ -1,9 +1,6 @@
 package com.wp.kafkasample.rest;
 
-import com.wp.kafkasample.model.CardPayment;
-import com.wp.kafkasample.model.CardPaymentEvent;
-import com.wp.kafkasample.model.OnlinePayment;
-import com.wp.kafkasample.model.OnlinePaymentEvent;
+import com.wp.kafkasample.model.*;
 import com.wp.kafkasample.services.SendPaymentService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,5 +37,17 @@ public class InboundController {
         sendPaymentService.sendPaymentEvent(String.valueOf(integer), onlinePaymentEvent);
 
         return "sent online payment event";
+    }
+
+    @GetMapping("/randomPayment")
+    public String sendRandomPayment() {
+
+        integer.addAndGet(1);
+
+        RandomPaymentEvent randomPaymentEvent = new RandomPaymentEvent();
+
+        sendPaymentService.sendPaymentEvent(String.valueOf(integer), randomPaymentEvent);
+
+        return "sent random payment event";
     }
 }
