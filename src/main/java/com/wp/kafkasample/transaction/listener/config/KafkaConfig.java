@@ -53,57 +53,57 @@ public class KafkaConfig {
     }
 
 
-    private ConsumerFactory<String, LargePackage> largePackageConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "large");
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "large");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(LargePackage.class));
-    }
+//    private ConsumerFactory<String, LargePackage> largePackageConsumerFactory() {
+//        Map<String, Object> props = new HashMap<>();
+//        props.put(ConsumerConfig.GROUP_ID_CONFIG, "large");
+//        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "large");
+//        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
+//        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(LargePackage.class));
+//    }
+//
+//    private ConsumerFactory<String, MediumPackage> mediumPackageConsumerFactory() {
+//        Map<String, Object> props = new HashMap<>();
+//        props.put(ConsumerConfig.GROUP_ID_CONFIG, "medium");
+//        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "medium");
+//        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
+//        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(MediumPackage.class));
+//    }
+//
+//    private ConsumerFactory<String, SmallPackage> smallPackageConsumerFactory() {
+//        Map<String, Object> props = new HashMap<>();
+//        props.put(ConsumerConfig.GROUP_ID_CONFIG, "small");
+//        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "small");
+//        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
+//        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(SmallPackage.class));
+//    }
 
-    private ConsumerFactory<String, MediumPackage> mediumPackageConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "medium");
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "medium");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(MediumPackage.class));
-    }
-
-    private ConsumerFactory<String, SmallPackage> smallPackageConsumerFactory() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "small");
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "small");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(SmallPackage.class));
-    }
-
-    @Bean
-    public KafkaMessageListenerContainer<String, LargePackage> msgContainer1() {
-
-        ContainerProperties properties = new ContainerProperties(LARGE_TOPIC);
-        properties.setMessageListener(new ListenerService());
-        return new KafkaMessageListenerContainer<>(largePackageConsumerFactory(), properties);
-    }
-
-    @Bean
-    public KafkaMessageListenerContainer<String, MediumPackage> msgContainer2() {
-
-        ContainerProperties properties = new ContainerProperties(MEDIUM_TOPIC);
-        properties.setMessageListener(new ListenerService());
-        return new KafkaMessageListenerContainer<>(mediumPackageConsumerFactory(), properties);
-    }
-
-    @Bean
-    public KafkaMessageListenerContainer<String, SmallPackage> msgContainer3() {
-
-        ContainerProperties properties = new ContainerProperties(SMALL_TOPIC);
-        properties.setMessageListener(new ListenerService());
-        return new KafkaMessageListenerContainer<>(smallPackageConsumerFactory(), properties);
-    }
+//    @Bean
+//    public KafkaMessageListenerContainer<String, LargePackage> msgContainer1() {
+//
+//        ContainerProperties properties = new ContainerProperties(LARGE_TOPIC);
+//        properties.setMessageListener(new ListenerService());
+//        return new KafkaMessageListenerContainer<>(largePackageConsumerFactory(), properties);
+//    }
+//
+//    @Bean
+//    public KafkaMessageListenerContainer<String, MediumPackage> msgContainer2() {
+//
+//        ContainerProperties properties = new ContainerProperties(MEDIUM_TOPIC);
+//        properties.setMessageListener(new ListenerService());
+//        return new KafkaMessageListenerContainer<>(mediumPackageConsumerFactory(), properties);
+//    }
+//
+//    @Bean
+//    public KafkaMessageListenerContainer<String, SmallPackage> msgContainer3() {
+//
+//        ContainerProperties properties = new ContainerProperties(SMALL_TOPIC);
+//        properties.setMessageListener(new ListenerService());
+//        return new KafkaMessageListenerContainer<>(smallPackageConsumerFactory(), properties);
+//    }
 }
