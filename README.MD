@@ -40,6 +40,11 @@
     public StringJsonMessageConverter converter() {
         return new StringJsonMessageConverter();
     }    
+    
+* add object to be deserialized in the consumer factory
+
+
+    return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(PaymentEvent.class));    
 
 ### method 3. apparently this works, but I never managed to get it working
 
