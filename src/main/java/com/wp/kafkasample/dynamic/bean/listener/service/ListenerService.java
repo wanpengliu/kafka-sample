@@ -1,4 +1,4 @@
-package com.wp.kafkasample.transaction.listener.service;
+package com.wp.kafkasample.dynamic.bean.listener.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

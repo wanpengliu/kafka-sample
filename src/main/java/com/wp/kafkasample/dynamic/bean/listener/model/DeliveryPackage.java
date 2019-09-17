@@ -1,4 +1,4 @@
-package com.wp.kafkasample.transaction.listener.model;
+package com.wp.kafkasample.dynamic.bean.listener.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

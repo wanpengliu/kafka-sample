@@ -1,4 +1,4 @@
-package com.wp.kafkasample.transaction.listener.config;
+package com.wp.kafkasample.dynamic.bean.listener.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

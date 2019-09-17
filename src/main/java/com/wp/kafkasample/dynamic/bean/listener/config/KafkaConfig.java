@@ -1,13 +1,7 @@
-package com.wp.kafkasample.transaction.listener.config;
+package com.wp.kafkasample.dynamic.bean.listener.config;
 
-import com.wp.kafkasample.transaction.listener.model.DeliveryPackage;
-import com.wp.kafkasample.transaction.listener.model.LargePackage;
-import com.wp.kafkasample.transaction.listener.model.MediumPackage;
-import com.wp.kafkasample.transaction.listener.model.SmallPackage;
-import com.wp.kafkasample.transaction.listener.service.ListenerService;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
+import com.wp.kafkasample.dynamic.bean.listener.model.DeliveryPackage;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
@@ -15,9 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.*;
-import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.listener.KafkaMessageListenerContainer;
-import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;

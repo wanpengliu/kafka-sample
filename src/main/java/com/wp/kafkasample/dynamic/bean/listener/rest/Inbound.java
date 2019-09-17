@@ -1,6 +1,6 @@
-package com.wp.kafkasample.transaction.listener.rest;
+package com.wp.kafkasample.dynamic.bean.listener.rest;
 
-import com.wp.kafkasample.transaction.listener.service.PackageService;
+import com.wp.kafkasample.dynamic.bean.listener.service.PackageService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

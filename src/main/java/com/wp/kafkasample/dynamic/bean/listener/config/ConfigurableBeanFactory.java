@@ -1,9 +1,9 @@
-package com.wp.kafkasample.transaction.listener.config;
+package com.wp.kafkasample.dynamic.bean.listener.config;
 
-import com.wp.kafkasample.transaction.listener.model.LargePackage;
-import com.wp.kafkasample.transaction.listener.model.MediumPackage;
-import com.wp.kafkasample.transaction.listener.model.SmallPackage;
-import com.wp.kafkasample.transaction.listener.service.ListenerService;
+import com.wp.kafkasample.dynamic.bean.listener.model.LargePackage;
+import com.wp.kafkasample.dynamic.bean.listener.model.MediumPackage;
+import com.wp.kafkasample.dynamic.bean.listener.model.SmallPackage;
+import com.wp.kafkasample.dynamic.bean.listener.service.ListenerService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.wp.kafkasample.transaction.listener.config.KafkaConfig.*;
+import static com.wp.kafkasample.dynamic.bean.listener.config.KafkaConfig.*;
 
 @Component
 @Slf4j
