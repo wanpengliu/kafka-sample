@@ -16,6 +16,7 @@ import org.springframework.kafka.core.*;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import org.springframework.kafka.listener.MessageListener;
+import org.springframework.kafka.listener.SeekToCurrentErrorHandler;
 import org.springframework.kafka.transaction.KafkaTransactionManager;
 
 import java.util.HashMap;
@@ -79,29 +80,43 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaMessageListenerContainer<String, String> listenerContainer(KafkaTransactionManager<Object, Object> transactionManager) {
+    public KafkaMessageListenerContainer<String, String> listenerContainer1(KafkaTransactionManager<Object, Object> transactionManager) {
 
         ContainerProperties properties = new ContainerProperties("topic-1");
-        properties.setMessageListener(new TransactionListenerContainer(kafkaTemplate()));
+        properties.setMessageListener(new TransactionListenerContainer(kafkaTemplate(), "topic-2"));
         properties.setTransactionManager(transactionManager);
 
         return new KafkaMessageListenerContainer<>(consumerFactory(), properties);
     }
 
     @Bean
-    public KafkaMessageListenerContainer<String, String> listenerContainer2() {
+    public KafkaMessageListenerContainer<String, String> listenerContainer2(KafkaTransactionManager<Object, Object> transactionManager) {
 
         ContainerProperties properties = new ContainerProperties("topic-2");
+        properties.setMessageListener(new TransactionListenerContainer(kafkaTemplate(), "topic-3"));
+        properties.setTransactionManager(transactionManager);
+
+        KafkaMessageListenerContainer<String, String> listenerContainer = new KafkaMessageListenerContainer<>(consumerFactory(), properties);
+        listenerContainer.setErrorHandler(new SeekToCurrentErrorHandler( (cr, ex) -> {
+            log.error("error happened for consumer record={}", cr.value(), ex);
+        }, 3));
+        return listenerContainer;
+    }
+
+    @Bean
+    public KafkaMessageListenerContainer<String, String> listenerContainer3() {
+
+        ContainerProperties properties = new ContainerProperties("topic-3");
         properties.setMessageListener(new MessageListener<String, String>() {
             @Override
             public void onMessage(ConsumerRecord<String, String> consumerRecord) {
-                log.info("received message from topic-2 with value={}", consumerRecord.value());
+                log.info("received message from topic-3 with value={}", consumerRecord.value());
             }
         });
 
         Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "consumer-group-2");
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "consumer-group-2");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "consumer-group-3");
+        props.put(ConsumerConfig.CLIENT_ID_CONFIG, "consumer-group-3");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrapServers());

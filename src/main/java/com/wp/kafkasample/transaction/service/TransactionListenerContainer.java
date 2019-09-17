@@ -12,15 +12,17 @@ public class TransactionListenerContainer implements MessageListener<String, Str
 
     private KafkaTemplate<String, String> transactionTemplate;
 
+    private String topic;
+
     @Override
     public void onMessage(ConsumerRecord<String, String> consumerRecord) {
 
         log.info("received consumer record with key={} and value={}", consumerRecord.key(), consumerRecord.value());
 
-        if (consumerRecord.value().equalsIgnoreCase("fail")) {
+        if (consumerRecord.value().equalsIgnoreCase("fail") && topic.equalsIgnoreCase("topic-3")) {
             throw new RuntimeException("failed");
         }
 
-        transactionTemplate.executeInTransaction(t -> t.send("topic-2", consumerRecord.key(), consumerRecord.value()));
+        transactionTemplate.executeInTransaction(t -> t.send(topic, consumerRecord.key(), consumerRecord.value()));
     }
 }

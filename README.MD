@@ -92,7 +92,8 @@ T is typeparameters from the class
 
     containerProperties.setTransactionManager(transactionManager);
     
-    
+    transaction manager can be set, even if there is no transaction to follow or commit at the end
+        
 * Producer
 
 
@@ -100,4 +101,9 @@ T is typeparameters from the class
     producerFactory.setTransactionIdPrefix("kafka-template-tx.");
     
 * when exception happens, by default it rolls back/retry 10 times and eventually give up.
-  The same record (same key and value) can be sent to the same topic by the same producer again        
+  The same record (same key and value) can be sent to the same topic by the same producer again
+  
+  SeekToCurrentErrorHandler helps to retry default 10 times
+  it takes a BiConsumer for one of the constructors to run after max retry fails
+  
+* one producer (producer config) for multipe messagelistenercontainer seems to be working fine        
