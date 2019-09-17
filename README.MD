@@ -80,3 +80,24 @@ http://localhost:8080/swagger-ui.html
 ## generics
 List<T>
 T is typeparameters from the class
+
+
+## Transaction
+* Listener
+    
+    
+    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+    props.put(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed");
+
+    containerProperties.setTransactionManager(transactionManager);
+    
+    
+* Producer
+
+
+    configProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "kafka-template-tx.");
+    producerFactory.setTransactionIdPrefix("kafka-template-tx.");
+    
+* when exception happens, by default it rolls back/retry 10 times and eventually give up.
+  The same record (same key and value) can be sent to the same topic by the same producer again        
